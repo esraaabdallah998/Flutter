@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -26,8 +25,8 @@ class _AppointmentState extends State<Appointment> {
   }
   Future<List<Event>> _getEvents() async {
 
-    var data = await rootBundle.loadString('assets/EventResponse.json');
-    var jsonData = json.decode(data);
+    var data = await http.get(Uri.parse('https://mocki.io/v1/7ab0a2a1-4a0f-41a6-899b-33038e531bef'));
+    var jsonData = json.decode(data.body);
 
     List<Event> events = [];
 

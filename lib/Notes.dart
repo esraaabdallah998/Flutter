@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:convert';
-import 'package:intl/number_symbols.dart';
+import 'package:http/http.dart' as http;
 class Notes extends StatefulWidget {
   @override
   _NotesState createState() => _NotesState();
 }
 
 class _NotesState extends State<Notes> {
+
   Future<List<Note>> _getNotes() async {
 
-    var data = await rootBundle.loadString('assets/NoteResponse.json');
-    var jsonData = json.decode(data);
+    var data = await http.get(Uri.parse('https://mocki.io/v1/fbd412b6-7ba2-41a7-a3ad-0c0e0fafb7e1'));
+    var jsonData = json.decode(data.body);
 
     List<Note> notes = [];
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 class MyContacts extends StatefulWidget {
   @override
   _MyContactsState createState() => _MyContactsState();
@@ -9,8 +9,8 @@ class _MyContactsState extends State<MyContacts> {
 
   Future<List<User>> _getUsers() async {
 
-    var data = await rootBundle.loadString('assets/ContactResponse.json');
-    var jsonData = json.decode(data);
+    var data = await http.get(Uri.parse('https://mocki.io/v1/f5089a77-5cbc-4882-975f-46abc21b8aa9'));
+    var jsonData = json.decode(data.body);
 
     List<User> users = [];
 

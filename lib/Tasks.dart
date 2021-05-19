@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 class MyTasks extends StatefulWidget {
   @override
   _MyTasksState createState() => _MyTasksState();
 }
 
 class _MyTasksState extends State<MyTasks> {
-  bool firstvalue = false;
   Future<List<Task>> _getTasks() async {
 
-    var data =  await rootBundle.loadString('assets/TaskResponse.json');
-    var jsonData = json.decode(data);
+    var data = await http.get(Uri.parse('https://mocki.io/v1/aa063fe9-80b8-4717-968e-960b4871e3bd'));
+    var jsonData = json.decode(data.body);
 
     List<Task> tasks = [];
 
